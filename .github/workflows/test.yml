@@ -1,0 +1,17 @@
+name: Basic tests
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install FFmpeg
+        run: choco install ffmpeg --yes --no-progress
+      - run: npm ci --ignore-scripts
+      - run: npm test

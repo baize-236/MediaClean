@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MediaClean · 素材批量清理</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/style-v2.css"></head>
+<body>
+ <header><div class="header-inner"><div class="brand"><span class="brand-mark">M</span><div><b>MediaClean</b><small>本地素材清理工作台</small></div></div><div class="header-actions"><span class="version">V1.0</span><div class="local-pill"><i></i>所有素材仅在本机处理</div></div></div></header>
+ <main>
+  <section class="hero"><div class="hero-copy"><span class="eyebrow">LOCAL MEDIA TOOLKIT</span><h1>框一次，处理整个素材文件夹</h1><p>选择固定水印区域，使用修复或模糊模式批量生成干净素材。适用于自有及已授权内容。</p><div class="hero-tags"><span>图片与视频</span><span>批量队列</span><span>本地隐私</span></div></div><div class="hero-visual"><div class="visual-card back"></div><div class="visual-card front"><span>本机已完成</span><strong id="total-done">0</strong><small>个处理任务</small><i></i></div></div></section>
+  <div class="flow-strip"><div><b>01</b><span><strong>添加素材</strong><small>支持批量拖入</small></span></div><i></i><div><b>02</b><span><strong>框选水印</strong><small>设置一次即可</small></span></div><i></i><div><b>03</b><span><strong>下载结果</strong><small>任务后台执行</small></span></div></div>
+  <div class="workspace">
+   <section class="panel setup-panel">
+    <div class="section-title"><span>1</span><div><h2>添加素材</h2><p>支持单个或批量选择，最大 2GB/个</p></div></div>
+    <label class="drop-zone" id="drop-zone"><input id="file-input" type="file" multiple accept="image/jpeg,image/png,image/webp,image/bmp,video/mp4,video/quicktime,video/x-matroska,video/x-msvideo,video/webm"><span class="upload-icon"><i></i></span><b>拖入图片或视频</b><small>点击选择 · Ctrl+V 粘贴图片或文件</small><em>JPG · PNG · WebP · MP4 · MOV</em></label>
+    <div class="file-head"><span>待处理素材 <b id="file-count">0</b></span><button class="text-btn" id="clear-files">清空</button></div>
+    <div class="file-list" id="file-list"><div class="empty-small">还没有添加素材</div></div>
+    <div class="section-title compact"><span>2</span><div><h2>处理方式</h2></div></div>
+    <p id="material-context" class="material-context" aria-live="polite">添加素材后，自动显示可用的处理方式</p>
+    <div class="mode-grid">
+     <label class="mode active"><input type="radio" name="mode" value="lama" checked><b>图片 AI 修复</b><small>仅图片 · 修补水印背景</small></label>
+     <label class="mode"><input type="radio" name="mode" value="repair"><b>快速填补</b><small>图片 / 视频 · 周围像素填补</small></label>
+     <label class="mode"><input type="radio" name="mode" value="blur"><b>区域模糊</b><small>稳定遮盖复杂水印</small></label>
+     <label class="mode"><input type="radio" name="mode" value="video-repair"><b>视频 AI 修复 · 实验</b><small>仅视频 · 跟踪后修复</small></label>
+    </div>
+    <div id="blur-settings" hidden>
+     <label class="field"><span>模糊强度 <output id="blur-strength-value">55</output></span><input type="range" id="blur-strength" min="1" max="100" value="55"></label>
+     <label class="field"><span>边缘柔和度 <output id="blur-feather-value">15%</output></span><input type="range" id="blur-feather" min="0" max="40" value="15"></label>
+     <p class="hint">框选时在水印四周留些空隙，让边缘自然过渡。先预览，再调整强度。模糊用于遮盖，不会还原背景。</p>
+    </div>
+    <div id="video-repair-settings" hidden><p class="hint">在水印清晰的时间点框选一次，先分析移动轨迹，再确认修复。支持 30 秒以内的固定帧率短视频，大尺寸自动缩小至最高 1080p 处理，完整保留画面。LaMa 逐帧补全，CPU 处理较慢，复杂背景仍可能闪烁。</p></div>
+    <label class="field"><span>导出质量</span><select id="quality"><option value="high">高清 · 文件较大</option><option value="balanced" selected>均衡 · 推荐</option><option value="small">省空间 · 处理更快</option></select></label>
+    <button class="primary" id="preview-current" disabled>先预览当前素材</button>
+    <label class="batch-setting"><input type="checkbox" id="apply-all">将当前选区应用到全部素材（相同水印位置）</label>
+    <button class="secondary batch-start" id="start" disabled>开始批量处理</button><p class="hint" id="setup-hint">请先添加素材并框选水印区域</p>
+   </section>
+   <section class="panel preview-panel">
+    <div class="section-title"><span>3</span><div><h2>框选水印</h2><p>按住鼠标拖动，尽量完整覆盖水印并留一点边缘</p></div><button class="secondary" id="reset-region">重新框选</button></div>
+    <div class="editor-tools" aria-label="选区工具">
+     <button class="secondary active" data-tool="rect">矩形</button><button class="secondary" data-tool="paint">画笔</button><button class="secondary" data-tool="erase">橡皮擦</button><button class="secondary" data-tool="pan">拖动画面</button><button class="secondary" id="undo-selection">撤销</button>
+     <label>笔刷 <input type="range" id="brush-size" min="1" max="20" value="4" aria-label="笔刷大小"></label>
+     <label>缩放 <select id="editor-zoom"><option value="1">适应画面</option><option value="1.5">150%</option><option value="2">200%</option><option value="3">300%</option><option value="4">400%</option></select></label>
+    </div><p class="hint editor-help">AI 修复可多次框选、涂抹及擦除；缩放后用“拖动画面”查看细节。</p>
+    <div class="preview-stage" id="preview-stage">
+     <div class="preview-empty" id="preview-empty"><div class="empty-graphic"><i></i><i></i><span>＋</span></div><b>在这里预览并框选</b><span>先从左侧添加一张图片或一段视频</span></div>
+     <div class="media-shell" id="media-shell" hidden><img id="image-preview" alt="素材预览"><video id="video-preview" muted loop playsinline></video><canvas id="selection"></canvas></div>
+    </div>
+    <div class="preview-actions"><button class="secondary" id="toggle-video" hidden>播放 / 暂停</button><div class="selection-tip"><i></i><span id="region-info">尚未框选水印区域</span></div></div>
+    <label id="video-timeline" hidden>视频时间 <input id="video-seek" type="range" min="0" max="1" step="0.01" value="0"><output id="video-time">0.00 秒</output><span class="hint">暂停后框选水印，此帧将作为跟踪参考。</span></label>
+   </section>
+  </div>
+  <section class="panel tasks-panel">
+   <div class="section-title"><span>4</span><div><h2>处理任务</h2><p>关闭页面不会中断正在执行的任务</p></div><button class="secondary" id="refresh">刷新</button></div>
+   <div class="task-list" id="task-list"><div class="empty-tasks"><b>暂无任务</b><span>处理完成后可在这里下载结果</span></div></div>
+  </section>
+ </main>
+ <div class="toast" id="toast"></div>
+ <link rel="stylesheet" href="/compare.css">
+ <script type="module" src="/app.js"></script>
+</body></html>
