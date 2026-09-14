@@ -2,9 +2,9 @@ import {spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {join} from 'node:path';
 import {access} from 'node:fs/promises';
+import {python} from './runtime.js';
 const root=fileURLToPath(new URL('../',import.meta.url));
 export async function inpaint({input,output,region,strokes,onProgress}){
- const python=join(root,'.venv','Scripts','python.exe');
  try{await access(python);await access(join(root,'models','big-lama.pt'));}catch{throw Error('LaMa 尚未安装完整，请先安装本地模型环境');}
  onProgress?.(10);
  return new Promise((resolve,reject)=>{

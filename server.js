@@ -110,4 +110,6 @@ const server=http.createServer({maxHeaderSize:256*1024},async(req,res)=>{
   const content=await readFile(join(publicDir,file));res.writeHead(200,{'Content-Type':file.endsWith('.js')?'text/javascript; charset=utf-8':file.endsWith('.css')?'text/css; charset=utf-8':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(content);
  }catch(error){if(!res.headersSent)json(res,error.status||500,{error:error.message||'操作失败'});else res.destroy();}
 });
-server.listen(Number(process.env.PORT||3220),'127.0.0.1',()=>console.log('MediaClean 已启动：http://127.0.0.1:'+(process.env.PORT||3220)));
+const host=process.env.HOST||'127.0.0.1';
+if(!['127.0.0.1','0.0.0.0'].includes(host))throw Error('HOST must be 127.0.0.1 or 0.0.0.0');
+server.listen(Number(process.env.PORT||3220),host,()=>console.log('MediaClean 已启动：http://127.0.0.1:'+(process.env.PORT||3220)));

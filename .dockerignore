@@ -1,0 +1,13 @@
+*
+!Dockerfile
+!package.json
+!package-lock.json
+!requirements.txt
+!requirements-torch.txt
+!server.js
+!src/
+!src/**
+!public/
+!public/**
+!scripts/
+!scripts/*.py

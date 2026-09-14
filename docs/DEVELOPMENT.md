@@ -53,6 +53,6 @@ Editor and video AI checks require installed Python dependencies and weights. `c
 
 ## 配置 / Configuration
 
-`PORT` defaults to 3220; `MEDIA_CLEAN_DATA_DIR` defaults to project `data/`. The server accepts `127.0.0.1` host headers only. AI workers currently use `.venv/Scripts/python.exe`, so Linux/macOS support is not claimed. `.env` files are not automatically loaded.
+`PORT` defaults to 3220; `MEDIA_CLEAN_DATA_DIR` defaults to project `data/`. The server accepts `127.0.0.1` host headers only. AI workers select the platform's virtual environment path; `PYTHON_PATH` can override it. `HOST=0.0.0.0` is intended only for containers with loopback port publishing. `.env` files are not automatically loaded by Node. See [local deployment](LOCAL_DEPLOYMENT.md).
 
-`PORT` 默认 3220，`MEDIA_CLEAN_DATA_DIR` 默认项目 `data/`。服务仅接受本机 Host。AI 当前使用 Windows Python 路径，未宣称支持 Linux/macOS。不会自动加载 `.env` 文件。
+`PORT` 默认 3220，`MEDIA_CLEAN_DATA_DIR` 默认项目 `data/`。服务仅接受本机 Host。AI 按系统选择虚拟环境路径，可用 `PYTHON_PATH` 覆盖。`HOST=0.0.0.0` 仅用于绑定宿主回环端口的容器。Node 不自动加载 `.env`。见 [本地部署](LOCAL_DEPLOYMENT.md)。

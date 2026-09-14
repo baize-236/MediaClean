@@ -1,5 +1,12 @@
 # 更新记录 / Changelog
 
+## Single-user deployment update / 单用户部署更新
+
+- Keep local single-user mode, without registration or quotas / 保持本地单用户模式，不加入注册或额度。
+- Select Windows/Linux Python paths automatically / 自动选择 Windows/Linux Python 路径。
+- Add loopback-only Docker Compose deployment and bilingual instructions / 新增只向本机发布端口的 Docker Compose 与双语说明。
+- Add Linux basic CI alongside Windows / 增加 Linux 基础测试。
+
 ## 1.0.0 — Initial source release / 首次源码发布
 
 - Local image AI repair, fill and adjustable blur / 本地图片 AI 修复、填补和可调模糊。

@@ -1,0 +1,13 @@
+services:
+  mediaclean:
+    build: .
+    ports:
+      - "127.0.0.1:3220:3220"
+    volumes:
+      - media-data:/app/data
+      - media-models:/app/models
+    init: true
+    restart: unless-stopped
+volumes:
+  media-data:
+  media-models:

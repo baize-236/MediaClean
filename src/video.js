@@ -1,9 +1,10 @@
 import {spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import {python} from './runtime.js';
 const root=fileURLToPath(new URL('../',import.meta.url));
 export function videoProcess(request,onProgress){
  return new Promise((resolve,reject)=>{
-  const child=spawn(root+'.venv/Scripts/python.exe',[root+'scripts/video_repair.py'],{windowsHide:true,env:{...process.env,PYTHONUTF8:'1'}});
+  const child=spawn(python,[root+'scripts/video_repair.py'],{windowsHide:true,env:{...process.env,PYTHONUTF8:'1'}});
   let buffer='',errors='',result,finished=false;
   const timer=setTimeout(()=>{if(!finished){child.kill();reject(Error('视频处理超时，请缩短视频后重试'));}},60*60*1000);
   child.stdout.on('data',data=>{buffer+=data;let end;while((end=buffer.indexOf('\n'))>=0){const line=buffer.slice(0,end);buffer=buffer.slice(end+1);try{const item=JSON.parse(line);if(item.progress!==undefined)onProgress?.(item.progress);if(item.result)result=item.result;}catch{}}});

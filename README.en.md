@@ -6,6 +6,8 @@ Local image cleanup with LaMa, batch processing, before/after comparison, and ex
 
 > Windows-first. The interface is currently Simplified Chinese. This is a local browser application, not a hosted service or standalone installer.
 
+**Single-user, without login or credits.** Windows instructions follow below; Linux and Docker users can follow the [local deployment guide](docs/LOCAL_DEPLOYMENT.md).
+
 ## Features
 
 | Feature | Images | Videos |
