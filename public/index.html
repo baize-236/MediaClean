@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MediaClean · 素材批量清理</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/style-v2.css"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MediaClean · 图片与视频去水印</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/style-v2.css"></head>
 <body>
- <header><div class="header-inner"><div class="brand"><span class="brand-mark">M</span><div><b>MediaClean</b><small>本地素材清理工作台</small></div></div><div class="header-actions"><span class="version">V1.0</span><div class="local-pill"><i></i>所有素材仅在本机处理</div></div></div></header>
+ <header><div class="header-inner"><div class="brand"><span class="brand-mark">M</span><div><b>MediaClean</b><small>本地图片与视频去水印</small></div></div><div class="header-actions"><span class="version">V1.0</span><div class="local-pill"><i></i>所有素材仅在本机处理</div></div></div></header>
  <main>
-  <section class="hero"><div class="hero-copy"><span class="eyebrow">LOCAL MEDIA TOOLKIT</span><h1>框一次，处理整个素材文件夹</h1><p>选择固定水印区域，使用修复或模糊模式批量生成干净素材。适用于自有及已授权内容。</p><div class="hero-tags"><span>图片与视频</span><span>批量队列</span><span>本地隐私</span></div></div><div class="hero-visual"><div class="visual-card back"></div><div class="visual-card front"><span>本机已完成</span><strong id="total-done">0</strong><small>个处理任务</small><i></i></div></div></section>
+  <section class="hero"><div class="hero-copy"><span class="eyebrow">IMAGE &amp; VIDEO WATERMARK REMOVER</span><h1>图片与视频去水印，本地批量处理</h1><p>框选水印，使用 AI 修复、快速填补或区域模糊处理，支持前后对比。移动水印跟踪为实验功能。适用于自有及已授权内容。</p><div class="hero-tags"><span>图片与视频</span><span>批量队列</span><span>本地隐私</span></div></div><div class="hero-visual"><div class="visual-card back"></div><div class="visual-card front"><span>本机已完成</span><strong id="total-done">0</strong><small>个处理任务</small><i></i></div></div></section>
   <div class="flow-strip"><div><b>01</b><span><strong>添加素材</strong><small>支持批量拖入</small></span></div><i></i><div><b>02</b><span><strong>框选水印</strong><small>设置一次即可</small></span></div><i></i><div><b>03</b><span><strong>下载结果</strong><small>任务后台执行</small></span></div></div>
   <div class="workspace">
    <section class="panel setup-panel">
@@ -15,10 +15,10 @@
     <div class="section-title compact"><span>2</span><div><h2>处理方式</h2></div></div>
     <p id="material-context" class="material-context" aria-live="polite">添加素材后，自动显示可用的处理方式</p>
     <div class="mode-grid">
-     <label class="mode active"><input type="radio" name="mode" value="lama" checked><b>图片 AI 修复</b><small>仅图片 · 修补水印背景</small></label>
+     <label class="mode active"><input type="radio" name="mode" value="lama" checked><b>图片 AI 去水印</b><small>仅图片 · 修补水印背景</small></label>
      <label class="mode"><input type="radio" name="mode" value="repair"><b>快速填补</b><small>图片 / 视频 · 周围像素填补</small></label>
      <label class="mode"><input type="radio" name="mode" value="blur"><b>区域模糊</b><small>稳定遮盖复杂水印</small></label>
-     <label class="mode"><input type="radio" name="mode" value="video-repair"><b>视频 AI 修复 · 实验</b><small>仅视频 · 跟踪后修复</small></label>
+     <label class="mode"><input type="radio" name="mode" value="video-repair"><b>视频 AI 去水印 · 实验</b><small>仅视频 · 跟踪后修复</small></label>
     </div>
     <div id="blur-settings" hidden>
      <label class="field"><span>模糊强度 <output id="blur-strength-value">55</output></span><input type="range" id="blur-strength" min="1" max="100" value="55"></label>

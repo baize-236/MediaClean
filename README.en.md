@@ -1,8 +1,16 @@
-# MediaClean
+# MediaClean · Image & Video Watermark Remover
 
 English · [简体中文](README.md)
 
-Local image cleanup with LaMa, batch processing, before/after comparison, and experimental moving-watermark repair for short videos.
+An open-source, local image and video watermark removal tool. Select watermark regions manually, then use AI inpainting, fast fill or regional blur, with batch processing and before/after comparison.
+
+**Image watermark removal · Video watermark removal · Batch processing · Local execution**
+
+- **Images:** select with rectangles, brush and eraser; use LaMa to inpaint the background.
+- **Fixed video watermarks:** mark a fixed region and apply fast fill or blur.
+- **Moving video watermarks (experimental):** select a template, inspect tracking, then apply frame-by-frame inpainting.
+
+Inpainting estimates hidden content, not guaranteed original details. Blur conceals watermarks; moving-watermark processing may lose tracking or produce flicker.
 
 > Windows-first. The interface is currently Simplified Chinese. This is a local browser application, not a hosted service or standalone installer.
 

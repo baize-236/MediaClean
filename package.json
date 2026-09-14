@@ -2,7 +2,7 @@
   "name": "media-clean",
   "version": "1.0.0",
   "private": true,
-  "description": "Local image cleanup and experimental short-video repair with LaMa and FFmpeg",
+  "description": "Local image and video watermark removal with LaMa and FFmpeg",
   "license": "MIT",
   "engines": { "node": ">=22" },
   "type": "module",
